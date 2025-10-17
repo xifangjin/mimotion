@@ -33,6 +33,8 @@ function inspect_next {
 
 function hours_except_now {
   cron_hours=$1
+
+  """
   hour=$(TZ=UTC date '+%H')
   hour=$((10#$hour))
   except_current_hours=$(echo "$cron_hours" | awk -v hour="$hour" -F ',' '{
@@ -55,6 +57,9 @@ function hours_except_now {
     result=$cron_hours
   fi
   echo "$result"
+
+  """
+  echo "$cron_hours"
 }
 
 function convert_utc_to_shanghai {
