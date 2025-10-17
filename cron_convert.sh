@@ -33,32 +33,6 @@ function inspect_next {
 
 function hours_except_now {
   cron_hours=$1
-
-  """
-  hour=$(TZ=UTC date '+%H')
-  hour=$((10#$hour))
-  except_current_hours=$(echo "$cron_hours" | awk -v hour="$hour" -F ',' '{
-    for (i=1;i<=NF;i++) {
-      if ($i!=hour) {
-        print $i
-      }
-    }
-  }')
-  result=""
-  while IFS= read -r line; do
-    if [ -z "$result" ]; then
-      result="$line"
-    else
-      result="$result,$line"
-    fi
-  done <<< "$except_current_hours"
-  if test -z "$result"; then
-    # 只有一个小时，则直接返回当前值
-    result=$cron_hours
-  fi
-  echo "$result"
-
-  """
   echo "$cron_hours"
 }
 
