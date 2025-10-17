@@ -10,9 +10,9 @@ function inspect_next {
   cron_str=$1
   cron_str="${cron_str//\'/}"
   minute=$(TZ=UTC date '+%M')
-  minute=$((10#$minute))
+  minute=$(($minute))
   hour=$(TZ=UTC date '+%H')
-  hour=$((10#$hour))
+  hour=$(($hour))
   cron_minute=$(echo "$cron_str" | awk '{print $1}')
   cron_hours=$(echo "$cron_str" | awk '{print $2}')
   # echo "current $hour:$minute"
